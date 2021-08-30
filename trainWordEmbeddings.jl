@@ -6,7 +6,7 @@
 
 using Unicode
 using JLD2
-
+const delimChar = '\t'
 
 function binarizeDepccFile()
     vocabDict     = Dict{String, UInt32}()
@@ -30,11 +30,14 @@ function binarizeDepccFile()
                             id = tryparse(UInt8, cols[1])
                             if id !== nothing
                                 h = tryparse(UInt8, cols[7])
-                                hId = if (h !== nothing) h else UInt8(0) end
+                                hId = if (h === nothing) UInt8(0) else h end
                                 caseT = caseType(cols[2])
                                 v = if (caseT == "customUp") cols[2] else lowercase(cols[2]) end
-                                vId = UInt32(get!(vocabDict, v, length(vocabDict)+1))
-                                vId0 = UInt32(get!(vocabDict, lowercase(cols[3]), length(vocabDict)+1))
+                                # lump together: word form, lemma, upos, misc (entity type); 
+                                # roughly 376048 uniq combos per chunk, so need 18 bits 
+                                vv = v * delimChar * lowercase(cols[3]) * delimChar * cols[4] * delimChar * cols[10]
+                                vvId = UInt32(get!(vocabDict, vv, length(vocabDict)+1))
+                                #  3 bits for caseT, 6 bits for deprel (~50 uniq), 8 bits for head offset
                                 featsId = UInt16(get!(featDict, caseT * ":" * cols[4] * ":" * cols[8] * ":" * cols[10], length(featDict)+1))
                                 println(sizeof(id), " ", sizeof(hId), " ", sizeof(featsId), " ", sizeof(vId), " ",sizeof(vId0))
                                 push!(bindata, (id, hId, featsId, vId, vId0))   #  cols[1:4], cols[7:8], cols[10]))
