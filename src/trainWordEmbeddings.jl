@@ -48,6 +48,7 @@ function processDoc(h)
     docTiers = Vector{UInt8}
     sizehint!(docTiers, 5000)
 
+    conlluLineToUdep = conlluLineToUdepF(spec.delimChar, spec.vocabDict)
     for (i, fLine) in enumerate(eachline(h))
         length(fLine)<=0 && continue
         i>5000 && break
@@ -73,7 +74,7 @@ function processDoc(h)
     end
 end
 
-function writeDoc()
+function writeBinaryDoc()
     sortedCounts = sort(collect(vocabDict), rev=true, by=x->getindex(x,2))
     oneCounts = 0
     for (w,c) in sortedCounts

@@ -1,0 +1,52 @@
+upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	654670
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	322052
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("asbestosizing", "asbestosize")	263193
+upos: TO  entity: O  caseType: none  depRel: aux  headOffset: 1  form-and-lemma: VocabEntry("annotated bibliographies", "annotated bibliography")	170266
+upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -1  form-and-lemma: VocabEntry("and a half", "and a half")	153263
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 2  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	145506
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	139177
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("a", "a(n)")	111576
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: -1  form-and-lemma: <null>	110611
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("at one blow", "at one blow")	105276
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 2  form-and-lemma: VocabEntry("a", "a(n)")	89662
+upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 1  form-and-lemma: VocabEntry("archivizes", "archivize")	84789
+upos: :  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	69945
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("aeolotropic", "aeolotropic")	67196
+upos: TO  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("annotated bibliographies", "annotated bibliography")	66787
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("athabaskan", "athabaskan")	52449
+upos: POS  entity: O  caseType: none  depRel: possessive  headOffset: -1  form-and-lemma: VocabEntry("'s-hertogenbosch", "'s-hertogenbosch")	50556
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 2  form-and-lemma: <null>	48212
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("auto shop", "auto shop")	47312
+upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 2  form-and-lemma: VocabEntry("archivizes", "archivize")	46257
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 3  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	41876
+upos: DT  entity: O  caseType: 1st  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	37555
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 3  form-and-lemma: <null>	37314
+upos: CD  entity: O  caseType: none  depRel: num  headOffset: 1  form-and-lemma: <null>	35448
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("amblygonal", "amblygonal")	34828
+upos: RB  entity: O  caseType: none  depRel: neg  headOffset: 1  form-and-lemma: <null>	33116
+upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: VocabEntry("?", "maebari")	32723
+upos: PRP  entity: O  caseType: none  depRel: nsubj  headOffset: 1  form-and-lemma: <null>	32095
+upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: VocabEntry("!", "beetloaf")	30507
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("-oth", "-oth")	29522
+upos: PRP$  entity: O  caseType: none  depRel: poss  headOffset: 1  form-and-lemma: VocabEntry("addas", "adda")	28020
+upos: CD  entity: O  caseType: none  depRel: num  headOffset: -1  form-and-lemma: <null>	27578
+upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -1  form-and-lemma: VocabEntry("autolaryngoscopes", "autolaryngoscope")	27163
+upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 3  form-and-lemma: VocabEntry("archivizes", "archivize")	27068
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: <null>	27066
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 4  form-and-lemma: <null>	26802
+upos: RB  entity: O  caseType: none  depRel: neg  headOffset: 1  form-and-lemma: VocabEntry("applicabilities", "applicability")	26466
+upos: DT  entity: O  caseType: none  depRel: det  headOffset: 3  form-and-lemma: VocabEntry("a", "a(n)")	26356
+upos: PRP$  entity: O  caseType: none  depRel: poss  headOffset: 1  form-and-lemma: <null>	26109
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("all-encompassing", "all-encompassing")	25070
+upos: JJ  entity: O  caseType: none  depRel: amod  headOffset: 1  form-and-lemma: <null>	24000
+upos: VBZ  entity: O  caseType: none  depRel: cop  headOffset: 2  form-and-lemma: VocabEntry("addes", "adde")	23591
+upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -3  form-and-lemma: VocabEntry("and a half", "and a half")	23214
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("at 'em ball", "at 'em ball")	22959
+upos: VBZ  entity: O  caseType: none  depRel: cop  headOffset: 1  form-and-lemma: VocabEntry("addes", "adde")	22858
+upos: VB  entity: O  caseType: none  depRel: auxpass  headOffset: 1  form-and-lemma: VocabEntry("advauncing", "advaunce")	22340
+upos: PRP  entity: O  caseType: none  depRel: dobj  headOffset: -1  form-and-lemma: VocabEntry("adversaria", "adversaria")	22185
+upos: :  entity: O  caseType: none  depRel: punct  headOffset: -1  form-and-lemma: <null>	22044
+upos: ,  entity: O  caseType: none  depRel: punct  headOffset: -3  form-and-lemma: <null>	21744
+upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("about", "on or about")	21006
+upos: PRP  entity: O  caseType: none  depRel: nsubj  headOffset: 1  form-and-lemma: VocabEntry("adversaria", "adversaria")	20442
+upos: MD  entity: O  caseType: none  depRel: aux  headOffset: 1  form-and-lemma: <null>	20187
