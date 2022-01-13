@@ -1,52 +1,252 @@
-upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	654670
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	322052
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("asbestosizing", "asbestosize")	263193
-upos: TO  entity: O  caseType: none  depRel: aux  headOffset: 1  form-and-lemma: VocabEntry("annotated bibliographies", "annotated bibliography")	170266
-upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -1  form-and-lemma: VocabEntry("and a half", "and a half")	153263
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 2  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	145506
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	139177
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("a", "a(n)")	111576
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: -1  form-and-lemma: <null>	110611
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("at one blow", "at one blow")	105276
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 2  form-and-lemma: VocabEntry("a", "a(n)")	89662
-upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 1  form-and-lemma: VocabEntry("archivizes", "archivize")	84789
-upos: :  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: <null>	69945
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("aeolotropic", "aeolotropic")	67196
-upos: TO  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("annotated bibliographies", "annotated bibliography")	66787
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("athabaskan", "athabaskan")	52449
-upos: POS  entity: O  caseType: none  depRel: possessive  headOffset: -1  form-and-lemma: VocabEntry("'s-hertogenbosch", "'s-hertogenbosch")	50556
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 2  form-and-lemma: <null>	48212
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("auto shop", "auto shop")	47312
-upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 2  form-and-lemma: VocabEntry("archivizes", "archivize")	46257
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 3  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	41876
-upos: DT  entity: O  caseType: 1st  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("algorithmize", "algorithmize")	37555
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 3  form-and-lemma: <null>	37314
-upos: CD  entity: O  caseType: none  depRel: num  headOffset: 1  form-and-lemma: <null>	35448
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: VocabEntry("amblygonal", "amblygonal")	34828
-upos: RB  entity: O  caseType: none  depRel: neg  headOffset: 1  form-and-lemma: <null>	33116
-upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: VocabEntry("?", "maebari")	32723
-upos: PRP  entity: O  caseType: none  depRel: nsubj  headOffset: 1  form-and-lemma: <null>	32095
-upos: .  entity: O  caseType: none  depRel: punct  headOffset: 0  form-and-lemma: VocabEntry("!", "beetloaf")	30507
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("-oth", "-oth")	29522
-upos: PRP$  entity: O  caseType: none  depRel: poss  headOffset: 1  form-and-lemma: VocabEntry("addas", "adda")	28020
-upos: CD  entity: O  caseType: none  depRel: num  headOffset: -1  form-and-lemma: <null>	27578
-upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -1  form-and-lemma: VocabEntry("autolaryngoscopes", "autolaryngoscope")	27163
-upos: PRP  entity: O  caseType: 1st  depRel: nsubj  headOffset: 3  form-and-lemma: VocabEntry("archivizes", "archivize")	27068
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 1  form-and-lemma: <null>	27066
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: 4  form-and-lemma: <null>	26802
-upos: RB  entity: O  caseType: none  depRel: neg  headOffset: 1  form-and-lemma: VocabEntry("applicabilities", "applicability")	26466
-upos: DT  entity: O  caseType: none  depRel: det  headOffset: 3  form-and-lemma: VocabEntry("a", "a(n)")	26356
-upos: PRP$  entity: O  caseType: none  depRel: poss  headOffset: 1  form-and-lemma: <null>	26109
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("all-encompassing", "all-encompassing")	25070
-upos: JJ  entity: O  caseType: none  depRel: amod  headOffset: 1  form-and-lemma: <null>	24000
-upos: VBZ  entity: O  caseType: none  depRel: cop  headOffset: 2  form-and-lemma: VocabEntry("addes", "adde")	23591
-upos: CC  entity: O  caseType: none  depRel: cc  headOffset: -3  form-and-lemma: VocabEntry("and a half", "and a half")	23214
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("at 'em ball", "at 'em ball")	22959
-upos: VBZ  entity: O  caseType: none  depRel: cop  headOffset: 1  form-and-lemma: VocabEntry("addes", "adde")	22858
-upos: VB  entity: O  caseType: none  depRel: auxpass  headOffset: 1  form-and-lemma: VocabEntry("advauncing", "advaunce")	22340
-upos: PRP  entity: O  caseType: none  depRel: dobj  headOffset: -1  form-and-lemma: VocabEntry("adversaria", "adversaria")	22185
-upos: :  entity: O  caseType: none  depRel: punct  headOffset: -1  form-and-lemma: <null>	22044
-upos: ,  entity: O  caseType: none  depRel: punct  headOffset: -3  form-and-lemma: <null>	21744
-upos: IN  entity: O  caseType: none  depRel: prep  headOffset: -1  form-and-lemma: VocabEntry("about", "on or about")	21006
-upos: PRP  entity: O  caseType: none  depRel: nsubj  headOffset: 1  form-and-lemma: VocabEntry("adversaria", "adversaria")	20442
-upos: MD  entity: O  caseType: none  depRel: aux  headOffset: 1  form-and-lemma: <null>	20187
+upos:. entity:O caseType:none depRel:punct headOffset:0 form:-zza	651475
+upos:DT entity:O caseType:none depRel:det headOffset:1 form:thcv	322052
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:oevs	263193
+upos:TO entity:O caseType:none depRel:aux headOffset:1 form:tnx	170266
+upos:CC entity:O caseType:none depRel:cc headOffset:-1 form:ancyrocephalids	153263
+upos:DT entity:O caseType:none depRel:det headOffset:2 form:thcv	145506
+upos:, entity:O caseType:none depRel:punct headOffset:0 form:+ve	139056
+upos:DT entity:O caseType:none depRel:det headOffset:1 form:^w	111576
+upos:, entity:O caseType:none depRel:punct headOffset:-1 form:+ve	110360
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:imzadis	105276
+upos:DT entity:O caseType:none depRel:det headOffset:2 form:^w	89662
+upos:PRP entity:O caseType:1st depRel:nsubj headOffset:1 form:hzs	84789
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:foquism	67196
+upos:TO entity:O caseType:none depRel:prep headOffset:-1 form:tnx	66787
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:omz	52449
+upos:POS entity:O caseType:none depRel:possessive headOffset:-1 form:'rrhoids	50556
+upos:, entity:O caseType:none depRel:punct headOffset:2 form:+ve	47995
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:witgats	47312
+upos:PRP entity:O caseType:1st depRel:nsubj headOffset:2 form:hzs	46257
+upos:DT entity:O caseType:none depRel:det headOffset:3 form:thcv	41876
+upos:DT entity:O caseType:1st depRel:det headOffset:1 form:thcv	37555
+upos:, entity:O caseType:none depRel:punct headOffset:3 form:+ve	37165
+upos:: entity:O caseType:none depRel:punct headOffset:0 form:9th	36601
+upos:DT entity:O caseType:none depRel:det headOffset:1 form:thirza	34828
+upos:RB entity:O caseType:none depRel:neg headOffset:1 form:n's	33116
+upos:. entity:O caseType:none depRel:punct headOffset:0 form:>	32723
+upos:PRP entity:O caseType:none depRel:nsubj headOffset:1 form:yotzei	31406
+upos:. entity:O caseType:none depRel:punct headOffset:0 form:	30507
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:bxo	29522
+upos:PRP$ entity:O caseType:none depRel:poss headOffset:1 form:mxp	28020
+upos:CC entity:O caseType:none depRel:cc headOffset:-1 form:oquendos	27163
+upos:PRP entity:O caseType:1st depRel:nsubj headOffset:3 form:hzs	27068
+upos:, entity:O caseType:none depRel:punct headOffset:4 form:+ve	26655
+upos:RB entity:O caseType:none depRel:neg headOffset:1 form:nosyls	26466
+upos:DT entity:O caseType:none depRel:det headOffset:3 form:^w	26356
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:frolovite	25070
+upos:VBZ entity:O caseType:none depRel:cop headOffset:2 form:irwinton	23591
+upos:CC entity:O caseType:none depRel:cc headOffset:-3 form:ancyrocephalids	23214
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:asyzygetic	22959
+upos:VBZ entity:O caseType:none depRel:cop headOffset:1 form:irwinton	22858
+upos:VB entity:O caseType:none depRel:auxpass headOffset:1 form:bdw	22340
+upos:PRP entity:O caseType:none depRel:dobj headOffset:-1 form:isy	22185
+upos:, entity:O caseType:none depRel:punct headOffset:-3 form:+ve	21707
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:abounds	21006
+upos:PRP entity:O caseType:none depRel:nsubj headOffset:1 form:isy	20442
+upos:JJ entity:O caseType:none depRel:amod headOffset:1 form:<null>	388120
+upos:NN entity:O caseType:none depRel:pobj headOffset:-2 form:<null>	267801
+upos:NN entity:O caseType:none depRel:nn headOffset:1 form:<null>	221365
+upos:RB entity:O caseType:none depRel:advmod headOffset:1 form:<null>	195555
+upos:NNP entity:O caseType:1st depRel:nn headOffset:1 form:<null>	150592
+upos:NN entity:O caseType:none depRel:dobj headOffset:-2 form:<null>	131991
+upos:NN entity:O caseType:none depRel:pobj headOffset:-1 form:<null>	125440
+upos:NN entity:O caseType:none depRel:pobj headOffset:-3 form:<null>	117592
+upos:NNS entity:O caseType:none depRel:pobj headOffset:-2 form:<null>	107488
+upos:IN entity:O caseType:none depRel:prep headOffset:-1 form:<null>	103718
+upos:VBD entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	92462
+upos:JJ entity:O caseType:none depRel:amod headOffset:2 form:<null>	90210
+upos:VB entity:O caseType:none depRel:xcomp headOffset:-2 form:<null>	89147
+upos:IN entity:O caseType:none depRel:prep headOffset:-2 form:<null>	81319
+upos:DT entity:O caseType:none depRel:det headOffset:1 form:<null>	80696
+upos:PRP$ entity:O caseType:none depRel:poss headOffset:1 form:<null>	77272
+upos:MD entity:O caseType:none depRel:aux headOffset:1 form:<null>	75210
+upos:VB entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	74575
+upos:NN entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	73578
+upos:RB entity:O caseType:none depRel:advmod headOffset:-1 form:<null>	69566
+upos:VBZ entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	69133
+upos:NN entity:O caseType:none depRel:dobj headOffset:-3 form:<null>	68269
+upos:VBN entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	67270
+upos:VBP entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	66363
+upos:PRP entity:O caseType:none depRel:nsubj headOffset:2 form:<null>	65463
+upos:PRP entity:O caseType:none depRel:nsubj headOffset:1 form:<null>	62033
+upos:IN entity:O caseType:none depRel:prep headOffset:-3 form:<null>	60383
+upos:NNS entity:O caseType:none depRel:pobj headOffset:-1 form:<null>	59986
+upos:NN entity:O caseType:none depRel:nsubj headOffset:1 form:<null>	52739
+upos:NNS entity:O caseType:none depRel:dobj headOffset:-2 form:<null>	52061
+upos:NNP entity:O caseType:1st depRel:nn headOffset:2 form:<null>	51707
+upos:MD entity:O caseType:none depRel:aux headOffset:2 form:<null>	51154
+upos:NNS entity:O caseType:none depRel:pobj headOffset:-3 form:<null>	44929
+upos:JJ entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	44478
+upos:DT entity:O caseType:none depRel:det headOffset:2 form:<null>	43411
+upos:NN entity:O caseType:none depRel:dobj headOffset:-1 form:<null>	42649
+upos:NNP entity:O caseType:1st depRel:pobj headOffset:-1 form:<null>	42275
+upos:IN entity:O caseType:none depRel:dep headOffset:-1 form:<null>	41719
+upos:VBG entity:O caseType:none depRel:pcomp headOffset:-1 form:<null>	41702
+upos:NNP entity:O caseType:1st depRel:ROOT headOffset:0 form:<null>	40515
+upos:PRP entity:O caseType:none depRel:pobj headOffset:-1 form:<null>	39176
+upos:PRP$ entity:O caseType:none depRel:poss headOffset:2 form:<null>	38537
+upos:IN entity:O caseType:none depRel:prep headOffset:-4 form:<null>	38491
+upos:VBP entity:O caseType:none depRel:aux headOffset:1 form:<null>	38066
+upos:PRP entity:O caseType:none depRel:dobj headOffset:-1 form:<null>	37438
+upos:NN entity:O caseType:none depRel:conj headOffset:-2 form:<null>	37235
+upos:NN entity:O caseType:none depRel:pobj headOffset:-4 form:<null>	35863
+upos:CD entity:O caseType:none depRel:num headOffset:1 form:<null>	35847
+upos:RP entity:O caseType:none depRel:prt headOffset:-1 form:<null>	35038
+upos:NN entity:O caseType:none depRel:nn headOffset:2 form:<null>	34582
+upos:RB entity:O caseType:none depRel:advmod headOffset:2 form:<null>	33474
+upos:: entity:O caseType:none depRel:punct headOffset:0 form:<null>	33022
+upos:NN entity:O caseType:none depRel:nsubj headOffset:2 form:<null>	32891
+upos:VBP entity:O caseType:none depRel:aux headOffset:2 form:<null>	32539
+upos:PRP entity:O caseType:none depRel:nsubj headOffset:3 form:<null>	32324
+upos:NNS entity:O caseType:none depRel:dobj headOffset:-1 form:<null>	31629
+upos:NNP entity:B-Person caseType:1st depRel:nn headOffset:1 form:<null>	29925
+upos:NNP entity:O caseType:1st depRel:pobj headOffset:-2 form:<null>	29661
+upos:JJ entity:O caseType:1st depRel:amod headOffset:1 form:<null>	28942
+upos:NNS entity:O caseType:none depRel:nsubj headOffset:1 form:<null>	28872
+upos:DT entity:O caseType:1st depRel:det headOffset:2 form:<null>	28665
+upos:CC entity:O caseType:none depRel:cc headOffset:-2 form:<null>	28359
+upos:JJ entity:O caseType:none depRel:amod headOffset:3 form:<null>	27870
+upos:PRP entity:O caseType:1st depRel:nsubj headOffset:1 form:<null>	27362
+upos:IN entity:O caseType:none depRel:mark headOffset:2 form:<null>	26714
+upos:VB entity:O caseType:none depRel:infmod headOffset:-2 form:<null>	26680
+upos:DT entity:O caseType:1st depRel:det headOffset:1 form:<null>	24970
+upos:CC entity:O caseType:none depRel:cc headOffset:-4 form:<null>	24739
+upos:IN entity:O caseType:none depRel:prep headOffset:-5 form:<null>	24082
+upos:NNS entity:O caseType:none depRel:dobj headOffset:-3 form:<null>	24037
+upos:DT entity:O caseType:none depRel:det headOffset:4 form:<null>	23709
+upos:VBD entity:O caseType:none depRel:auxpass headOffset:1 form:<null>	23285
+upos:NN entity:O caseType:none depRel:dobj headOffset:-4 form:<null>	22945
+upos:VBN entity:O caseType:none depRel:partmod headOffset:-1 form:<null>	22913
+upos:NNS entity:O caseType:none depRel:conj headOffset:-2 form:<null>	22805
+upos:: entity:O caseType:none depRel:punct headOffset:-1 form:<null>	21937
+upos:VBG entity:O caseType:none depRel:ROOT headOffset:0 form:<null>	21751
+upos:VBZ entity:O caseType:none depRel:aux headOffset:1 form:<null>	21586
+upos:NN entity:O caseType:none depRel:nsubj headOffset:3 form:<null>	21151
+upos:IN entity:O caseType:none depRel:mark headOffset:3 form:<null>	20937
+upos:VBZ entity:O caseType:none depRel:cop headOffset:3 form:<null>	20865
+upos:RB entity:O caseType:none depRel:advmod headOffset:-2 form:<null>	20552
+upos:, entity:O caseType:none depRel:punct headOffset:127 form:<null>	163762
+upos:CC entity:O caseType:none depRel:cc headOffset:127 form:<null>	138800
+upos:IN entity:O caseType:none depRel:prep headOffset:127 form:<null>	77723
+upos:RB entity:O caseType:none depRel:advmod headOffset:127 form:<null>	77682
+upos:NN entity:O caseType:none depRel:nsubj headOffset:127 form:<null>	68005
+upos:NN entity:O caseType:none depRel:conj headOffset:127 form:<null>	67241
+upos:IN entity:O caseType:none depRel:complm headOffset:127 form:<null>	59896
+upos:NNS entity:O caseType:none depRel:nsubj headOffset:127 form:<null>	58816
+upos:'' entity:O caseType:none depRel:punct headOffset:127 form:<null>	57244
+upos:NN entity:O caseType:none depRel:dep headOffset:127 form:<null>	50493
+upos:RB entity:O caseType:1st depRel:advmod headOffset:127 form:<null>	50204
+upos:PRP entity:O caseType:1st depRel:nsubj headOffset:127 form:<null>	49127
+upos:VB entity:O caseType:none depRel:conj headOffset:127 form:<null>	48006
+upos:WRB entity:O caseType:none depRel:advmod headOffset:127 form:<null>	46759
+upos:`` entity:O caseType:none depRel:punct headOffset:127 form:<null>	46328
+upos:VB entity:O caseType:none depRel:ccomp headOffset:127 form:<null>	43563
+upos:IN entity:O caseType:1st depRel:prep headOffset:127 form:<null>	42717
+upos:NNP entity:O caseType:1st depRel:nsubj headOffset:127 form:<null>	42437
+upos:NNS entity:O caseType:none depRel:conj headOffset:127 form:<null>	42293
+upos:NNP entity:O caseType:1st depRel:conj headOffset:127 form:<null>	41443
+upos:VBP entity:O caseType:none depRel:cop headOffset:127 form:<null>	41315
+upos:: entity:O caseType:none depRel:punct headOffset:127 form:<null>	40127
+upos:RB entity:O caseType:none depRel:neg headOffset:127 form:<null>	37380
+upos:VBD entity:O caseType:none depRel:cop headOffset:127 form:<null>	37240
+upos:VB entity:O caseType:none depRel:xcomp headOffset:127 form:<null>	37063
+upos:JJ entity:O caseType:none depRel:conj headOffset:127 form:<null>	35772
+upos:WDT entity:O caseType:none depRel:nsubj headOffset:127 form:<null>	33477
+upos:IN entity:O caseType:none depRel:mark headOffset:127 form:<null>	33401
+upos:NNP entity:O caseType:all depRel:nn headOffset:127 form:<null>	31888
+upos:NNP entity:O caseType:1st depRel:nn headOffset:127 form:<null>	30338
+upos:JJ entity:O caseType:none depRel:amod headOffset:127 form:<null>	29706
+upos:VB entity:O caseType:none depRel:cop headOffset:127 form:<null>	29602
+upos:IN entity:O caseType:none depRel:dep headOffset:127 form:<null>	29516
+upos:VBD entity:O caseType:none depRel:aux headOffset:127 form:<null>	29495
+upos:-RRB- entity:O caseType:none depRel:dep headOffset:127 form:<null>	29343
+upos:TO entity:O caseType:none depRel:prep headOffset:127 form:<null>	29208
+upos:NN entity:O caseType:none depRel:nsubjpass headOffset:127 form:<null>	28564
+upos:VBG entity:O caseType:none depRel:xcomp headOffset:127 form:<null>	28402
+upos:VBD entity:O caseType:none depRel:conj headOffset:127 form:<null>	28099
+upos:VBZ entity:O caseType:none depRel:cop headOffset:127 form:<null>	28007
+upos:NNP entity:O caseType:1st depRel:pobj headOffset:127 form:<null>	27273
+upos:CD entity:O caseType:none depRel:num headOffset:127 form:<null>	26408
+upos:NNS entity:O caseType:none depRel:pobj headOffset:127 form:<null>	26367
+upos:WP entity:O caseType:none depRel:nsubj headOffset:127 form:<null>	25865
+upos:VBZ entity:O caseType:none depRel:auxpass headOffset:127 form:<null>	25853
+upos:VBN entity:O caseType:none depRel:ccomp headOffset:127 form:<null>	25795
+upos:CC entity:O caseType:1st depRel:cc headOffset:127 form:<null>	24992
+upos:VBD entity:O caseType:none depRel:ccomp headOffset:127 form:<null>	24510
+upos:TO entity:O caseType:none depRel:aux headOffset:127 form:<null>	23985
+upos:NNP entity:O caseType:1st depRel:dep headOffset:127 form:<null>	23914
+upos:RB entity:O caseType:none depRel:dep headOffset:127 form:<null>	23763
+upos:VBG entity:O caseType:none depRel:partmod headOffset:127 form:<null>	23508
+upos:VBD entity:O caseType:none depRel:rcmod headOffset:127 form:<null>	22875
+upos:IN entity:O caseType:1st depRel:mark headOffset:127 form:<null>	22867
+upos:-LRB- entity:O caseType:none depRel:dep headOffset:127 form:<null>	22771
+upos:DT entity:O caseType:none depRel:det headOffset:127 form:<null>	22605
+upos:VBZ entity:O caseType:none depRel:aux headOffset:127 form:<null>	21970
+upos:VBN entity:O caseType:none depRel:conj headOffset:127 form:<null>	21405
+upos:JJ entity:O caseType:none depRel:dep headOffset:127 form:<null>	21172
+upos:NNP entity:I-Organization caseType:1st depRel:nn headOffset:127 form:<null>	21063
+upos:MD entity:O caseType:none depRel:aux headOffset:127 form:<null>	20979
+upos:VBN entity:O caseType:none depRel:rcmod headOffset:127 form:<null>	20868
+upos:VBP entity:O caseType:none depRel:ccomp headOffset:127 form:<null>	20786
+upos:DT entity:O caseType:none depRel:nsubj headOffset:127 form:<null>	20739
+upos:NNP entity:B-Organization caseType:1st depRel:nn headOffset:127 form:<null>	20723
+upos:VB entity:O caseType:none depRel:dep headOffset:127 form:<null>	20621
+upos:VBP entity:O caseType:none depRel:rcmod headOffset:127 form:<null>	20146
+upos:NN entity:O caseType:none depRel:appos headOffset:127 form:<null>	20116
+upos:NN entity:O caseType:none depRel:<null> headOffset:127 form:<null>	120540
+upos:NNS entity:O caseType:none depRel:<null> headOffset:127 form:<null>	102787
+upos:VBG entity:O caseType:none depRel:<null> headOffset:127 form:<null>	97436
+upos:JJ entity:O caseType:none depRel:<null> headOffset:127 form:<null>	94118
+upos:VBN entity:O caseType:none depRel:<null> headOffset:127 form:<null>	93139
+upos:VBZ entity:O caseType:none depRel:<null> headOffset:127 form:<null>	83944
+upos:VBP entity:O caseType:none depRel:<null> headOffset:127 form:<null>	75743
+upos:VB entity:O caseType:none depRel:<null> headOffset:127 form:<null>	65924
+upos:DT entity:O caseType:none depRel:<null> headOffset:127 form:<null>	63108
+upos:NNP entity:O caseType:1st depRel:<null> headOffset:127 form:<null>	57327
+upos:VBD entity:O caseType:none depRel:<null> headOffset:127 form:<null>	51754
+upos:NNP entity:B-Person caseType:1st depRel:<null> headOffset:127 form:<null>	49327
+upos:PRP entity:O caseType:none depRel:<null> headOffset:127 form:<null>	48107
+upos:IN entity:O caseType:none depRel:<null> headOffset:127 form:<null>	47430
+upos:NN entity:O caseType:1st depRel:<null> headOffset:127 form:<null>	44240
+upos:-LRB- entity:O caseType:none depRel:<null> headOffset:127 form:<null>	42244
+upos:NNP entity:O caseType:all depRel:<null> headOffset:127 form:<null>	41501
+upos:NNP entity:B-Location caseType:1st depRel:<null> headOffset:127 form:<null>	38769
+upos:NNS entity:O caseType:1st depRel:<null> headOffset:127 form:<null>	37040
+upos:-RRB- entity:O caseType:none depRel:<null> headOffset:127 form:<null>	36794
+upos:DT entity:O caseType:1st depRel:<null> headOffset:127 form:<null>	33112
+upos:JJR entity:O caseType:none depRel:<null> headOffset:127 form:<null>	33048
+upos:NNP entity:I-Person caseType:1st depRel:<null> headOffset:127 form:<null>	32444
+upos:CD entity:O caseType:none depRel:<null> headOffset:127 form:<null>	30004
+upos:RB entity:O caseType:none depRel:<null> headOffset:127 form:<null>	29629
+upos:VB entity:O caseType:1st depRel:<null> headOffset:127 form:<null>	27040
+upos:NNP entity:I-Organization caseType:1st depRel:<null> headOffset:127 form:<null>	23251
+upos:WP entity:O caseType:none depRel:<null> headOffset:127 form:<null>	20161
+upos:NNP entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	65893
+upos:PRP$ entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	29090
+upos:JJ entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	26014
+upos:IN entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	23943
+upos:EX entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	22723
+upos:TO entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	22497
+upos:JJS entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	21261
+upos:RBR entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	20108
+upos:NNPS entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	18593
+upos:PRP entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	17615
+upos:NN entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	17369
+upos:WDT entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	16654
+upos:WRB entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	15916
+upos:. entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	14894
+upos:VBG entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	13723
+upos:CC entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	13486
+upos:RB entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	12743
+upos:UH entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	12331
+upos:`` entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	12087
+upos:POS entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	11367
+upos:$ entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	8593
+upos:FW entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	8496
+upos:WP entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	7881
+upos:MD entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	7231
+upos:CD entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	6970
+upos:RBS entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	6927
+upos:VBN entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	6810
+upos:'' entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	6445
+upos:VBP entity:<null> caseType:<null> depRel:<null> headOffset:127 form:<null>	6108

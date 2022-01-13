@@ -3,97 +3,107 @@
 using Unicode, BenchmarkTools
 # using StructIO
 
-struct UdepToken 
+struct UdepTokenBase 
     upos::UInt8
     entity::UInt8
     caseType::UInt8
     depRel::UInt8
     headOffset::Int8
-    formlemma0::UInt8   # section id
-    formlemma::UInt16   # id within section
+    formLemma0::UInt8   # section id
+    formLemma::UInt16   # id within section
 end
 
-function bin2Pretty(x::UdepToken, vocabList)
-#    println("Form-and-lemma:", x.formlemma0, " ", x.formlemma, " key:", x.formlemma0>0 && vocabDictVec[x.formlemma0].key)
-    join(["upos:", x.upos>0 ? UposVals[x.upos] : "<null>", 
-        " entity:", x.entity>0 ? EntityVals[x.entity] : "<null>", 
-        " caseType:", x.caseType>0 ? CasetypeVals[x.caseType] : "<null>",
-        " depRel:", x.depRel>0 ? DepRelVals[x.depRel] : "<null>",
-        " headOffset:", string(x.headOffset),
-        " form-and-lemma:", x.formlemma0>0 && x.formlemma>0 ? vocabList[(x.formlemma0-1)*sizeof(UInt16)+x.formlemma] : "<null>"],
-        ' ')
+struct UdepToken
+    base::UdepTokenBase
+    formStr::String
+    customCase::Tuple{Vararg{UInt8}}
 end
 
-struct UdepTokenCustomCase
-    tok::UdepToken
-    case::Tuple{Vararg{UInt8}}
+const nullUtok = UdepToken(
+    UdepTokenBase(0, 0, 0, 0, typemax(Int8), 0, 0),
+    "", 
+    ()
+)
+
+function formId(form0, form)
+    form0>0 ? (form0-1)*(typemax(UInt16)+1) + form : 0
 end
 
-function bin2Pretty(x::UdepTokenCustomCase)
-    strType = CasetypeVals[x.tok.caseType]
-    bin2Pretty(x.tok) * " casePattern:", (startswith(strType, "custom") ? ('-' * join(map(y->reverse(bitstring(y)), x.case), '-')) : "")
-end
-
-const nullUtok = UdepTokenCustomCase(UdepToken(0, 0, 0, 0, 0, 0, 0), ())
-
-struct VocabEntry
-    form::String
-    lemma::String
-end
-
-import Base.isless
-Base.isless(a::VocabEntry, b::VocabEntry) = a.form < b.form || (a.form == b.form && a.lemma < b.lemma)
-
-struct OovUdepToken #<: AbstractToken
-    udepTok::UdepToken
-    oovTok::Union{Nothing, VocabEntry}
+function writePretty(f, x::UdepTokenBase, vocabList) #, vocabDictVec)
+    fId = formId(x.form0, x.form) 
+    v = fId > 0 ? vocabList[fId] : "<null>"
+    #println("writePretty:", x.form0, " ", x.form, " v:", v, " globalId: ", map(Int, globalVocabId(vocabDictVec, v)))
+    write(f, "upos:", x.upos>0 ? UposVals[x.upos] : "<null>", 
+             " entity:", x.entity>0 ? EntityVals[x.entity] : "<null>", 
+             " caseType:", x.caseType>0 ? CasetypeVals[x.caseType] : "<null>",
+             " depRel:", x.depRel>0 ? DepRelVals[x.depRel] : "<null>",
+             " headOffset:", string(x.headOffset),
+             " form:", v)
 end
 
 struct VocabSection   # used by ModelSpec's vocabDictVec
-    key::VocabEntry
-    dict::Dict{VocabEntry, UInt16}
+    key::String
+    dict::Dict{String, UInt16}
+end
+
+struct BinFormLemma
+    form0::UInt8  # form section
+    lemma0::UInt8 # lemma section
+    form::UInt16  # form ID
+    lemma::UInt16  # lemma ID
+end
+
+import Base.isless
+function isless(x1::BinFormLemma, x2::BinFormLemma) 
+    x1.form0 < x2.form0 || 
+    (x1.form0 == x2.form0 && 
+        (x1.form < x2.form ||
+        (x1.form == x2.form && 
+            (x1.lemma0 < x2.lemma0 ||
+            (x1.lemma0 == x2.lemma0 && x1.lemma < x2.lemma)))))
 end
 
 struct ModelSpec
     delimChar::Char     # typically tab for natural language data
-    beginDocTok::UdepToken # symbol used to mark the start of a new doc and sentence
-    beginSenTok::UdepToken # symbol used to mark the start of a new sentence
+    beginDocTok::UdepTokenBase # symbol used to mark the start of a new doc and sentence
+    beginSenTok::UdepTokenBase # symbol used to mark the start of a new sentence
     awsRegion::String   # region of s3 bucket containing input data from wiktionary and single depcc chunk used for setting up tiers
     s3bucket::String    # name of bucket containing input data used to setup binarization
     tierSource::String  # name of single depcc chunk used to setup feature combo tiers
     vocabSource::String # name of vocab source file, eg. derived from wikitionary
     tierFile::String    # name of output file that stores list of tiers
     vocabFile::String   # name of output file that stores global form+lemma vocab entries
-    specFile::String    # name of file that stores bindings for this ModelSpec
+    specFile::String    # name of output file that stores bindings for this ModelSpec
     numTiers::UInt8     # number of feature combo sets organized by frequency, with fewer bytes associated with lower tiers
     tierThreshold::UInt # frequency level used as threshold between tiers
-    tierIndices::Vector{UInt8}          # vector with numTiers entries ranging from 2-256 indicating the starting indices of each tier
-    tierDict::Dict{UdepToken, UInt8}    # maps feature combo to tier number for high frequency feature combos
-    tierList::Vector{UdepToken}         # ordinal list of tiered feature combos
-    vocabDictVec::Vector{VocabSection}  # map token strings of global voacb to integers
-    vocabList::Vector{VocabEntry}       # ordinal list of global vocab
+    tierIndices::Vector{UInt8}            # vector with numTiers entries ranging from 2-256 indicating the starting indices of each tier
+    tierDict::Dict{UdepTokenBase, UInt8}  # maps feature combo to tier number for high frequency feature combos
+    tierList::Vector{UdepTokenBase}       # ordinal list of tiered feature combos
+    vocabDictVec::Vector{VocabSection}    # map token strings of global vocab to integers
+    vocabList::Vector{String}             # ordinal list of global vocab
+    lemmaList::Vector{BinFormLemma}       # part-of-speech-based lemma
 end
 
 # TIERS
-function Tier_1_Key(tok::UdepToken)
-    UdepToken(tok.upos, tok.entity, tok.caseType, tok.depRel, tok.headOffset, tok.formlemma0, tok.formlemma)
+function Tier_1_Key(tok::UdepTokenBase)
+    UdepTokenBase(tok.upos, tok.entity, tok.caseType, tok.depRel, tok.headOffset, tok.form0, tok.form)
 end
-function Tier_2_Key(tok::UdepToken)
-    UdepToken(tok.upos, tok.entity, tok.caseType, tok.depRel, tok.headOffset, 0, 0)
+function Tier_2_Key(tok::UdepTokenBase)
+    UdepTokenBase(tok.upos, tok.entity, tok.caseType, tok.depRel, tok.headOffset, 0, 0)
 end
-function Tier_3_Key(tok::UdepToken)
-    UdepToken(tok.upos, tok.entity, tok.caseType, tok.depRel, 0, 0, 0)
+function Tier_3_Key(tok::UdepTokenBase)
+    UdepTokenBase(tok.upos, tok.entity, tok.caseType, tok.depRel, typemax(Int8), 0, 0)
 end
-function Tier_4_Key(tok::UdepToken)
-    UdepToken(tok.upos, tok.entity, tok.caseType, 0, 0, 0, 0)
+function Tier_4_Key(tok::UdepTokenBase)
+    UdepTokenBase(tok.upos, tok.entity, tok.caseType, 0, typemax(Int8), 0, 0)
 end
-function Tier_5_Key(tok::UdepToken)
-    UdepToken(tok.upos, 0, 0, 0, 0, 0, 0)
+function Tier_5_Key(tok::UdepTokenBase)
+    UdepTokenBase(tok.upos, 0, 0, 0, typemax(Int8), 0, 0)
 end
 
 const tierKeyFs = [Tier_1_Key, Tier_2_Key, Tier_3_Key, Tier_4_Key, Tier_5_Key]  # tierKeyFs
 
-#=function Tier_2_Tuple(tok::UdepToken, delimChar)
+#=function Tier_2_Tuple(tok::UdepTokenBase, delimChar)
     l = length(tok.upos)
     if l >1 && SubString(tok.upos, 1, 2) in  ["CD", "JJ", "NN", "RB", "VB"]
         join([tok.upos, tok.entity, tok.caseType, tok.depRel, tok.headOffset], delimChar)
@@ -103,58 +113,78 @@ const tierKeyFs = [Tier_1_Key, Tier_2_Key, Tier_3_Key, Tier_4_Key, Tier_5_Key]  
 end  =#
 
 function getTierKeyId(tierDict, tok, maxTierNum)
+    #maxTierNum>0 && println("getTierKeyId:", maxTierNum, " ", tok )
     for x in 1:maxTierNum
+        #println("u110:", tok, " ", x)
         key = tierKeyFs[x](tok) #Eg: Tier_1_Tuple(tok)
-        id = getkey(tierDict, key, 0)
-        if (id > 0) return id, key end
+        id = get(tierDict, key, 0)
+        #println("u115 id:", id, " key:", key, " tier:", x)
+        if (id > 0) return id, key, x end
     end
-    return 0, nullUtok
+    return 0, nullUtok, 0
 end
 
-function globalVocabId(vocabDictVec, vocabEntry)
-    imax = length(vocabDictVec)
-    str = vocabEntry.form
+function globalVocabId(str)
+    imax = length(spec.vocabDictVec)
     i0 = max(1, Int(trunc((Int(str[1]) - Int('a') +1)/(26/imax))))
     i = min(i0, imax)
-    while i > 1 && vocabEntry < vocabDictVec[i].key
+    #str == "ministers" && println("0:", str, " imax:", imax, " i0:", i0, " i:", i, "dict key:", vocabDictVec[i].key)
+    while i > 1 && str < spec.vocabDictVec[i].key
         i -= 1
     end
-    while i+1 < imax && vocabEntry >= vocabDictVec[i+1].key
+    #str == "ministers" && println("1:", str, i, " dict key:", vocabDictVec[i].key, " dict key+1:", i<imax && vocabDictVec[i+1].key)
+    while i < imax && str >= spec.vocabDictVec[i+1].key
         i += 1
     end
-    v = get(vocabDictVec[i].dict, vocabEntry, 0)
+    v = get(spec.vocabDictVec[i].dict, str, 0)
+    #str == "ministers" && println("2:", str, i, "dict key:", vocabDictVec[i].key, " v:", v)
     v > 0 && return i, v
     return 0, 0
 end
 
+function globalFormLemmaId(formStr, lemmaStr)
+    if formStr == lemmaStr
+        globalVocabId(formStr)
+    else 
+        i = searchsortedfirst(spec.lemmaList, lemmaStr) + length(spec.vocabList)
+    end
+end
+
+# map a line in CoNLL-U Format to UdepToken struct
+function conlluLineToUdep(delimChar, vocabDictVec, line, rootID)
+    #tierNum> 1 && println("line2dep142:", line, " rootID:", rootID)
+    cols = split(chomp(line), delimChar)
+    rawtok = cols[2]
+    caseT, customCase = caseType(rawtok)
+    id = tryparse(UInt8, cols[1])
+    id === nothing && error("Error: id===nothing:" * line)
+    hid = tryparse(UInt8, cols[7])
+    hid === nothing && error("Error: hid===nothing:" * line)
+    depRel = cols[8]
+    id == 0 && (rootID = -1)
+    depRel == "ROOT" && (rootID = id)
+    headOffset = if (depRel == "punct" && hid == rootID) 0 else Int8(hid) - Int8(id) end
+    form = lowercase(cols[2]) #lowercase(cols[3]))
+    lemma = lowercase(cols[3])
+    #fl.form == "ministers" && println("line2dep:", fl, " ", line)
+    i, v = globalFormLemmaId(vocabDictVec, form, lemma)
+    #tierNum> 1 && println("line2dep158:", i, " ", v, " rootID:", rootID)
+    return UdepToken(
+        UdepTokenBase(
+            UposDict[cols[4]],          # upos           45 values
+            EntityDict[cols[10]],       # entityType      7 values
+            CasetypeDict[caseT],        # caseType       15 values
+            DepRelDict[depRel],         # depRel         50 values
+            headOffset,                 # headOffset    256 values (+/- 128)
+            i,                          # vocab section ~17 values
+            v),                         # vocab ID    65536 values
+        form, customCase),        # customCase is the bit pattern for custom capitalization: 0-7 bytes
+    rootID
+end
+
 # map a line in CoNLL-U Format to UdepToken struct
 function conlluLineToUdepF(delimChar, vocabDictVec)
-    function (line, rootID)
-        cols = split(chomp(line), delimChar)
-        rawtok = cols[2]
-        caseT, customCase = caseType(rawtok)
-        id = tryparse(UInt8, cols[1])
-        id === nothing && error("Error: id===nothing:" * line)
-        hid = tryparse(UInt8, cols[7])
-        hid === nothing && error("Error: hid===nothing:" * line)
-        depRel = cols[8]
-        id == 0 && (rootID = -1)
-        depRel == "ROOT" && (rootID = id)
-        headOffset = if (depRel == "punct" && hid == rootID) 0 else Int8(hid) - Int8(id) end
-        fl = VocabEntry(lowercase(cols[2]), lowercase(cols[3]))
-        i, v = globalVocabId(vocabDictVec, fl)
-        return UdepTokenCustomCase(
-            UdepToken(
-                UposDict[cols[4]],          # upos           45 values
-                EntityDict[cols[10]],       # entityType      7 values
-                CasetypeDict[caseT],        # caseType       15 values
-                DepRelDict[depRel],         # depRel         50 values
-                headOffset,                 # headOffset    256 values (+/- 128)
-                i,                          # vocab section ~17 values
-                v),                         # vocab ID    65536 values
-                customCase),                # bit pattern for custom capitalization: 0-7 bytes
-        rootID
-    end
+    (line, rootID) -> conlluLineToUdep(delimChar, vocabDictVec, line, rootID)
 end
 
 function checkbit(s::Vector{UInt8}, n)
@@ -209,7 +239,7 @@ function caseType(str)
 end
 
 function isvalid(str)
-    str != "" && !occursin(r"^\s", str) && isascii(str)
+    str != "" && !occursin(r"\s", str) && isascii(str)
 end 
 
 function readTierInfo(model)
@@ -281,7 +311,7 @@ function calcTreeOffsets(d, start=1)
     end
 end
 
-const EntityVals = [ # 7 vals
+const entityVals = [ # 7 vals
     "B-Location",
     "B-Organization",
     "B-Person",
@@ -291,12 +321,12 @@ const EntityVals = [ # 7 vals
     "O"
 ]
 
-const EntityDict= Dict{String,UInt8}() 
-for (i, v) in enumerate(EntityVals)
-    EntityDict[v] = i
+const entityDict= Dict{String,UInt8}() 
+for (i, v) in enumerate(entityVals)
+    entityDict[v] = i
 end
 
-const CasetypeVals = [ # 15 vals
+const casetypeVals = [ # 15 vals
     "none",
     "1st",
     "2nd",
@@ -314,12 +344,12 @@ const CasetypeVals = [ # 15 vals
     "custom:7"
 ]
 
-const CasetypeDict= Dict{String,UInt8}() 
-for (i, v) in enumerate(CasetypeVals)
-    CasetypeDict[v] = i
+const casetypeDict= Dict{String,UInt8}() 
+for (i, v) in enumerate(casetypeVals)
+    casetypeDict[v] = i
 end
 
-const UposVals = [ # 45 vals plus two boundary markers
+const uposVals = [ # 45 vals plus two boundary markers
     "<beginDoc>",
     "<beginSen>",
     "#",
@@ -368,12 +398,41 @@ const UposVals = [ # 45 vals plus two boundary markers
     "WRB",
     "``"
 ]
-const UposDict = Dict{String,UInt8}() 
-for (i, v) in enumerate(UposVals)
-    UposDict[v] = i
+const uposDict = Dict{String,UInt8}() 
+for (i, v) in enumerate(uposVals)
+    uposDict[v] = i
 end
 
-const DepRelVals = [ # 50 vals
+# Maps a UposDict integer to a BasePos integer, in which nouns, verbs, adjectives and adverbs are lumped together in four groups
+const basePosDict = Dict{UInt8,UInt8}() 
+for (i, v) in enumerate(uposVals)
+    startswith(v, "J") ? basePosDict[i] = uposDict["JJ"] :
+    startswith(v, "N") || startswith(v, "CD") ? basePosDict[i] = uposDict["NN"] :
+    startswith(v, "RB") ? basePosDict[i] = uposDict["RB"] :
+    startswith(v, "V") ? basePosDict[i] = uposDict["VB"] :
+    basePosDict[i] = i
+end
+
+const agreementNumberNone       = 0
+const agreementNumberSingular   = 1
+const agreementNumberPlural     = 2
+const agreementNumberAmbiguous  = 3
+
+# Agreement between verbs and nouns
+const agreementNumberDict = Dict{UInt8,UInt8}() 
+for (i, v) in enumerate(uposVals)
+    v in ("CD") ? agreementNumberDict[i]            = agreementNumberAmbiguous :  # ambiguous, eg: "one" vs. "two"
+    v in ("NN", "NNP") ? agreementNumberDict[i]     = agreementNumberSingular :   # singular
+    v in ("NNPS", "NNS") ? agreementNumberDict[i]   = agreementNumberPlural :     # plural
+    v in ("VBP") ? agreementNumberDict[i]           = agreementNumberPlural :     # plural
+    v in ("VBZ") ? agreementNumberDict[i]           = agreementNumberSingular :   # singular
+    agreementNumberDict[i]                          = agreementNumberNone         # irrelevant
+end
+
+const singularCDstrs = ("one", "1", "1.0", "1.00")
+const singularCDs = map(x->globalVocabId(vocabDictVec, x), singularCDstrs)
+
+const depRelVals = [ # 50 vals
     "ROOT",
     "abbrev",
     "acomp",
@@ -426,7 +485,7 @@ const DepRelVals = [ # 50 vals
     "xcomp"
 ]
 
-const DepRelDict = Dict{String,UInt8}() 
-for (i, v) in enumerate(DepRelVals)
-    DepRelDict[v] = i
+const depRelDict = Dict{String,UInt8}() 
+for (i, v) in enumerate(depRelVals)
+    depRelDict[v] = i
 end
