@@ -1,0 +1,26 @@
+#NAME,      RELATION,    VAL_SOURCE    FILTER,   TRANSFORM,          GRANULARITY, MODEL
+upos,       false,       depcc,          1,   catTransform,        token,      true
+entity,     false,       depcc,          1,   catTransform,        token,      true
+caps,       false,       depcc,          1,   catTransform,        token,      true
+depRel,     false,       depcc,          1,   catTransform,        token,      true
+cdForm,     false,       depcc,         15,   catTransform,        token,      false
+number,     false,       upos;formlemma, 1,   catTransform,         token,      true
+headDir,    false,       headOffset,     1,   catTransform,         token,      true
+basePOS,    false,       upos,           1,   catTransform,         token,      true
+headOffset, false,       Int8,           1,   null,                 token,      true
+treeOffset, false,       Int8,           1,   null,                 token,      true
+form,       false,       wiktionary,     1,   globalVocabTransform, token,      true
+lemma,      false,       wiktionary,     1,   globalVocabTransform, token,      true
+#personPOS, false,       manuel,         1,   catTransform,         token,      true
+#
+#tensePOS,  false,       manuel,         1,   catTransform,         clause,      true
+#
+rightNeighbor,  true,    Bool,           1,  nonNull,              sentence,      true
+leftNeighbor,   true,    Bool,           1,  nonNull,              sentence,      true
+head,           true,    Bool,           1,  nonNull,              sentence,      true
+rightSibling,   true,    Bool,           1,  nonNull,              sentence,      true
+leftSibling,    true,    Bool,           1,  nonNull,              sentence,      true
+sameSen,        true,    Bool,           1,  nonNull,              sentence,      true
+#
+sameDoc,        true,    Bool,           1,  nonNull,              document,      true
+
