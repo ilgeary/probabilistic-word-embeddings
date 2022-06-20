@@ -19,22 +19,24 @@ function prepBinaryScheme()
     @time extractEnglishVocab()
     open(fetchIfNotLocal(spec, :tierSource)) do fi
         collectFeatureInfoFromDepcc()
-        open("../" * spec.tierFile, "w") do fo
+        open(spec.dataPrefix * spec.tierFile, "w") do fo
             for tierNum in 1:spec.numTiers
                 println("Setting up tier ", tierNum)
                 tupleCounts = collectTierKeyCounts(tierNum)
-                writeTierInfo(fo, tierNum, tupleCounts, spec)
+                recordTierInfo(fo, tierNum, tupleCounts, spec)
             end
         end
     end
-    bson(spec.specFile, a=spec)
+    println(spec.vals)
+    bson(spec.dataPrefix * spec.specFile, a=spec)
 end
 
 function fetchIfNotLocal(spec, property)
     #awsconfig = global_aws_config(; region=spec.awsRegion) 
-    largeDataFile = getproperty(spec, property)
+    largeDataFile = spec.dataPrefix * getproperty(spec, property)
     #println("Fetching S3 object:", spec.s3bucket, field)
     #AWSS3.s3_get_file(awsconfig, spec.s3bucket, field, largeDataFile)
+    println("largeDataFile:", largeDataFile)
     return largeDataFile
 end
 
@@ -45,13 +47,11 @@ function collectTierKeyCounts(tierNum)
     tupleCounts = Dict{UdepTokenCore, Int32}()
     sizehint!(tupleCounts, 500000)
     rootID = -1
-    for line in eachline(spec.tierSource)
-        (length(line)<=0 || line[1] == '#') && continue   #### refine this later
+    for line in eachline(spec.dataPrefix * spec.tierSource)
         t, rootID = conlluLineToUdepCore(line, rootID)
         t.formLemma0 <= 0 && continue
-        id = 0 
-        id, = getTierKeyId(t, tierNum-1)
-        if id == 0
+        key, = getTierKeyId(t, tierNum-1)
+        if key >= maxTierKey
             key = tierKeyFs[tierNum](t)
             tupleCounts[key] = get(tupleCounts, key, 0) + 1
             #println("85 key:", key, " count:", tupleCounts[key])
@@ -61,7 +61,7 @@ function collectTierKeyCounts(tierNum)
     return tupleCounts
 end
 
-function writeTierInfo(f, tierNum, tupleCounts, spec)
+function recordTierInfo(f, tierNum, tupleCounts, spec)
     sortedCounts = sort!(collect(tupleCounts), rev=true, by=x->getindex(x,2))
     x = length(spec.tierList) + 1
     for (k,c) in sortedCounts  # keep only the tier keys above the frequency threshold
@@ -78,5 +78,5 @@ function writeTierInfo(f, tierNum, tupleCounts, spec)
 end
 
 #@time extractEnglishVocab(InitModelSpec())
-##@time prepBinaryScheme()
+@time const spec = initModelSpec(); prepBinaryScheme()
 ##print_timer(timerOutput)

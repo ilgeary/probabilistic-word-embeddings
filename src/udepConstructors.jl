@@ -2,8 +2,22 @@
 
 include("extractWiktionaryVocab.jl")
 
+const beginDocStr = "<beginDoc>"
+const beginSenStr = "<beginSen>"
+const nullTreeOffset = typemax(Int8)
+const nullUtokStrings    = UdepTokenCoreStrings("", "", "", "", nullTreeOffset, "", "")  
+const beginDocTokStrings = UdepTokenCoreStrings(beginDocStr, "", "", "", nullTreeOffset, "", "")
+const beginSenTokStrings = UdepTokenCoreStrings(beginSenStr, "", "", "", nullTreeOffset, "", "")
+const nullUtok = UdepTokenCore(0, 0, 0, 0, nullTreeOffset, 0, 0)  
+const beginDocTok = UdepTokenCore(; upos = spec.catStrTransforms[:upos][beginDocStr]) # symbol used to mark the start of a new doc and sentence
+const beginSenTok = UdepTokenCore(; upos = spec.catStrTransforms[:upos][beginSenStr]) # symbol used to mark the start of a new sentence
+
 # map a line in CoNLL-U Format to UdepTokenCoreStrings struct
 function conlluLineToUdepCoreStrings(line, rootID)
+    length(line)<=0 && return nullUtokStrings, 0 
+    startswith(line, "# newdoc") && return beginDocTokStrings, 0
+    startswith(line, "# sent_id") && return beginSenTokStrings, 0
+    startswith(line, "#") && return nullUtokStrings, 0
     cols = split(chomp(line), spec.delimChar)
     rawtok = cols[2]
     id = tryparse(UInt8, cols[1])
@@ -28,7 +42,10 @@ end
 # map a line in CoNLL-U Format to UdepToken struct
 function conlluLineToUdepCore(line, rootID)  
     #tierNum> 1 && println("line2dep142:", line, " rootID:", rootID)
-    u, rootID = conlluLineToUdepCoreStrings(line, rootID)  
+    u, rootID = conlluLineToUdepCoreStrings(line, rootID) 
+    u == nullUtokStrings && return nullUtok, 0
+    u == beginDocTokStrings && return beginDocTok, 0
+    u == beginSenTokStrings && return beginSenTok, 0 
     form0, form = globalVocabCode(u.form) 
     lemma0, lemma = globalVocabCode(u.lemma)
     v0, v = getFormLemmaCode(form0, form, lemma0, lemma)

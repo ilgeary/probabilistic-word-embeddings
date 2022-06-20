@@ -2,6 +2,10 @@
 
 include("coreFeatDefs.jl")
 
+abstract type FeatCounts end
+
+const counts = Vector{Vector{<:UInt}}()
+
 function collectFeatureInfoFromDepcc()
     loadFeatSpec()
     counts = Dict{Symbol, Dict{String, UInt32}}()
@@ -15,7 +19,7 @@ function collectFeatureInfoFromDepcc()
     end
     println("depccFeats:", depccFeats)
     rootId = -1
-    for line in eachline(spec.tierSource)
+    for line in eachline(fetchIfNotLocal(spec, :tierSource))
         (length(line)<=0 || line[1] == '#') && continue 
         u, rootId = conlluLineToUdepCoreStrings(line, rootId)
         for g in depccFeats

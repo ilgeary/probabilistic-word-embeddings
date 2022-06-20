@@ -4,7 +4,7 @@ include("setupUdepccVals.jl")
 
 function extractEnglishVocab()
     vocabList, lemmaList = collectVocabDict(spec)
-    open("../" * spec.vocabFile, "w") do fw
+    open(spec.dataPrefix * spec.vocabFile, "w") do fw
         writeVocabForms(fw, vocabList)
         writeVocabLemmas(fw, lemmaList)
     end
@@ -98,7 +98,7 @@ function collectVocabDict(spec)
         c> 500 && !occursin(r"[a-zA-z\d]", v) && push!(tmpVocabList, v)
     end 
     println("Length filtered tmpVocabList from chunk:", length(tmpVocabList)) =#
-    vocabList = ["<beginDoc>", "<beginSen>", "€", "--", "-", ";", "+", "(", "....", "!!", "!!!", "/", "\$", "™", ")", "...", 
+    vocabList = ["", "€", "--", "-", ";", "+", "(", "....", "!!", "!!!", "/", "\$", "™", ")", "...", 
                      "©", "°", ":)", "%", ",", "\"", ":", ". . .", "."] 
     sizehint!(vocabList, 1500000)
     append!(vocabList, [string(x) for x in 0:9]) #, spec.catStrTransforms[:cdForm])

@@ -1,6 +1,6 @@
 # write_bin_depcc.jl
 
-include("binarizeDepcc.jl")
+#include("binarizeUdepcc.jl")
 #= Bindoc layout, s = section; 
 0 <count_8>
 <key0_8> <key_16>

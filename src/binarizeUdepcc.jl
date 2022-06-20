@@ -1,9 +1,15 @@
-# binarizeDepcc.jl
+# binarizeUdepcc.jl
 
 using BSON
-include("accessoryFeatDefs.jl")
 
-#const spec = BSON.load("test.bson")
+include("modelspec.jl")
+
+if ! @isdefined spec
+    const spec = BSON.load("/Users/irenelangkildegeary2015/data/word-embeddings/model/modelSpec.bson")[:a]
+end
+
+include("writeBinUdepcc.jl")
+include("accessoryFeatDefs.jl")
 
 struct VocabCode
     id0::UInt8
@@ -15,12 +21,12 @@ function isless(x1::VocabCode, x2::VocabCode)
 end
 
 struct Docdat
-    keys::Vector{UInt8}           # tier key integers
+    keyIds::Vector{UInt8}         # tier key integers
     tiers::Vector{UInt8}          # tier to which key belongs
     utoks::Vector{UdepTokenCore}  # core token info
-    rightChildren::Vector{UInt8}  # dependency tree structure info
+    rightChildren::Vector{Vector{UInt8}}  # dependency tree structure info
     leftChildren::Vector{Vector{UInt8}} # dependency tree structure info
-    treeOffsets::Vector{Vector{UInt8}}  # dependency tree structure info
+    treeOffsets::Vector{UInt8}    # dependency tree structure info
     vocabdat::Dict{UInt32, VocabCode} # holds freqs at first, and shortcode ID later
     shortcodes0::Vector{UInt8}    # position in vector is the shortcode ID for the given global vocab section code
     shortcodes::Vector{UInt16}    # position in vector is the shortcode ID for the given global vocab entry code 
@@ -28,11 +34,11 @@ struct Docdat
 end
 
 function Docdat()
-    return DocDat(Vector(), Vector(), Vector(), Vector(), Vector(), Vector(), Dict(), Vector(), Vector(), Vector())
+    return Docdat(Vector(), Vector(), Vector(), Vector(), Vector(), Vector(), Dict(), Vector(), Vector(), Vector())
 end
 
-function resetDocDat(d)
-    empty!(d.keys)
+function resetDocdat(d)
+    empty!(d.keyIds)
     empty!(d.tiers)
     empty!(d.utoks)
     empty!(d.rightChildren)  
@@ -44,54 +50,54 @@ function resetDocDat(d)
     empty!(d.ix)
 end
 
-function pushKeyTierUtokEtc(d, key, tier, tok)
-    push!(d.keys, key)
+function pushKeyidTierUtok(d, keyId, tier, utok)
+    push!(d.keyIds, keyId)
     push!(d.tiers, tier)
-    push!(d.toks, tok)
+    push!(d.utoks, utok)
+end
+
+function pushTreeData(d, i)
+    push!(d.rightChildren, Vector())
+    push!(d.leftChildren, Vector())
+    rootI = treeChildren(d, i)
+    push!(d.treeOffsets, rootI)
+    calcTreeOffsets(d, i)
 end
 
 # wget https://commoncrawl.s3.amazonaws.com/contrib
 function encodeChunk(filename)
     docGroup = 0
-    docdat = initDocDat()
-    i = 0
-    curSentStartPos = 0
+    d = Docdat()
+    i = 1   # index of start of sentence
     rootID = -1
     for line in eachline(filename)
-        length(line)<=0 && continue
-        if line[1] == "# newdoc" && length(toks) > 0
-            #unigramBigramCounts(docdat)
+        tok, rootID = conlluLineToUdepCore(line, rootID)
+        tok == nullUtok && continue
+        keyId, tier = getTierKeyId(tok, spec.numTiers)
+        if tok == beginDocTok && length(d.utoks) > 0
+            pushTreeData(d, i)
+            #unigramBigramCounts(d)
             getShortCodes!(d)
-            writeEncodedDoc(docdat, shortcodes)
-            resetDocDat(docdat)
-            push!(d.treeOffsets, 0)
-            i = 0
+            writeEncodedDoc(d, shortcodes)
+            resetDocdat(d)
             if docGroup % (typemax(UInt8) + 1) == 0
-                writeDocGroup()
+                closeDocGroup
+                newDocGroup()
                 docGroup = 0
             end
-        elseif line[1] == "# sent_id"
-            treeChildren(docdat, curSentStartPos)
-            calcTreeOffsets(docdat, curSentStartPos)
-            i += 1
-            curSentStartPos = i
-            pushKeyTierTokEtc(docdat, docdat.beginSenTok, 0, nullUtok, "", ())
-        elseif line[1] == "#" 
-            continue
-        else 
-            i += 1
-            tok, rootID = conlluLineToUdepCore(line, rootID)
-            found, key, tier = getTierKey(tok, spec.numTiers)
-            if !found 
-                key = typemax(UInt8)
-                tier = spec.numTiers + 1
+            i = 1
+            pushKeyIdTierUtok(d, keyId, tier, tok)
+        elseif tok == beginSenTok
+            if d.utoks[end] != beginDocTok
+                pushTreeData(d, i)
+                i = 1
+                pushKeyIdTierUtok(d, keyId, tier, tok)
             end
-            pushKeyTierUtokEtc(docdat, key, tier, tok)
+        else 
             getTokenFeatureCounts(tok)
             vcode = VocabCode(tok.formLemma0, tok.formLemma)
-            if tier > 1 && tok.formLemma0 > 0
-                vocabdat[vcode] = get(vocabdat, vcode, 0) + 1
-            end
+            vocabdat[vcode] = get(vocabdat, vcode, 0) + 1
+            pushKeyIdTierUtok(d, keyId, tier, tok)
         end
     end
     calcTreeOffsets(d, curSentStartPos)
@@ -102,15 +108,21 @@ function unigramBigramCounts(model, d)
     #for f in 
 end
 
-function treeChildren(d, start=1)
-    for (i, tok) in enumerate(d.toks[start])
+function treeChildren(d, i)
+    root = i
+    for tok in Iterators.rest(d.utoks, i)
+        head = i+ tok.headOffset
+        root == i && root = head
         tok.headOffset == 0 && continue
-        tok.headOffset > 0 && push!(d.leftChildren[i+ tok.headOffset], i)
-        push!(d.rightChildren[i+ tok.headOffset], i)
+        tok.headOffset > 0 && push!(d.leftChildren[head], i)
+        push!(d.rightChildren[head], i)
+        i += 1
     end
+    return root
 end
 
 function calcTreeOffset(d, i)
+    i <= 0 && return 0
     ho = d.utoks[i].headOffset
     ho == 0 && return 0
     hi = i + ho
@@ -125,9 +137,10 @@ function calcTreeOffset(d, i)
     end
 end
 
-function calcTreeOffsets(d, init=1)
-    for i in init:length(d.toks)
+function calcTreeOffsets(d, i)
+    for i in i0:length(d.toks)
         push!(d.treeOffsets, calcTreeOffset(d, i))
+        i += 1
     end
 end
 
@@ -156,9 +169,27 @@ function getShortCodes!(d)
         vocabdat[v] = 0
     end
     for (i, j) in enumerate(d.ix)
-        vocabdat[VocabCode(docdat.utoks[j].formlemma0, docdat.utoks[j].formlemma)] = i
+        vocabdat[VocabCode(d.utoks[j].formlemma0, d.utoks[j].formlemma)] = i
     end
 end
 
+const granularityMap = Dict{Symbol, Vector{UInt8}}()
 
-encodeChunk("~/data/word-embeddings/input/part-m-00009.gitignored")
+function makeGranularityMap()
+    for enumerate(f,fspec) in spec.featspecs
+        haskey(granularityMap, fspec.granularity) ?
+            push!(granularityMap[fspec.granularity], i) :
+            granularityMap[fspec.granularity] = [f]
+    end
+end
+
+function tokenFeatCounts(t)
+    for i in granularityMap["token"]
+        val = spec.featspec[i].func(t)
+end
+
+function unigramBigramCounts(d)
+end
+
+
+encodeChunk("/Users/irenelangkildegeary2015//data/word-embeddings/input/part-m-00060")

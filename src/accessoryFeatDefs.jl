@@ -1,6 +1,6 @@
 # accessoryFeatDefs.jl
 
-include("setupBinarization.jl")
+include("binTierDefs.jl")
 
 function setupBasePOS()
     uposDict = spec.catStrTransforms[:upos][1]

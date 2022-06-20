@@ -29,7 +29,8 @@ end
 #  processed by functions in "binarizeDepcc.jl"; 
 #  depended on by "featdefs.jl" 
 struct Featspec
-    name::Symbol        # a function which extracts a feature's value from its input
+    name::Symbol          # a function which extracts a feature's value from its input
+    func::Function        # function that return feature from specified granular segment
     relation::Bool        # whether a function is a relation or not
     valSource::Symbol     # source for determining range of potential feature values
     filter::Int           # function which filters set of potential values
@@ -39,7 +40,9 @@ struct Featspec
 end
 
 function Featspec(lineStr::Vector{SubString{String}})#, relationStr::SubString{String}, valSourceStr::SubString{String}, filterStr::SubString{String}, transformStr::SubString{String}, granularityStr::SubString{String}, modelStr::SubString{String}) 
-    Featspec(Symbol(lineStr[1]), 
+    name = lineStr[1]
+    Featspec(Symbol(name), 
+        eval(Symbol(name * "_FeatF")),
         parse(Bool, lineStr[2]), 
         Symbol(     lineStr[3]), 
         parse(Int,  lineStr[4]),
@@ -49,14 +52,12 @@ function Featspec(lineStr::Vector{SubString{String}})#, relationStr::SubString{S
 end
 
 struct ModelSpec
-    delimChar::Char            # typically '\t' (tab) for natural language data
-    beginDocTok::UdepTokenCore # symbol used to mark the start of a new doc and sentence
-    beginSenTok::UdepTokenCore # symbol used to mark the start of a new sentence
+    delimChar::Char     # typically '\t' (tab) for natural language data
     awsRegion::String   # region of s3 bucket containing input data from wiktionary and single depcc chunk used for setting up tiers
     s3bucket::String    # name offe bucket containing input data used to setup binarization
     dataPrefix::String  # location for reading and writing of data, "~/data" by default
-    tierSource::String  # name of single depcc chunk used to setup feature combo tiers
     vocabSource::String # name of vocab source file, eg. derived from wikitionary
+    tierSource::String  # name of single depcc chunk used to setup feature combo tiers
     tierFile::String    # name of output file that stores list of tiers
     vocabFile::String   # name of output file that stores global form+lemma vocab entries
     specFile::String    # name of output file that stores bindings for this ModelSpec

@@ -34,8 +34,9 @@ leftNeighbor(dToks, i) = i - 1
 rightNeighbor(dToks, i) = i + 1
 head(dToks, i) = i + d[i].headoffset
 
-function treeChildren(d, start=1)
-    for (i, tok) in enumerate(d.toks[start])
+function treeChildren(d, i=1)
+    i <= 0 && return
+    for tok in Iterators.rest(d.utoks, i)
         tok.headOffset == 0 && continue
         tok.headOffset > 0 && push!(d.leftChildren[i+ tok.headOffset], i)
         push!(d.rightChildren[i+ tok.headOffset], i)
@@ -126,6 +127,9 @@ function formLemmaPairToStr(flpair)
     return vocabCodeToStr(flpair.form0, flpair.form) * " " * vocabCodeToStr(flpair.lemma0, flpair.lemma)
 end
 
+#struct ModelStats
+#    vocabListLength
+
 function vocabCodeToStr(v0, v)
     vId = codeToId(v0, v) 
     #println("vocabCodeToStr:", vId)
@@ -143,6 +147,7 @@ function codeToId(code0, code)
 end
 
 function globalVocabCode(str)
+    #println("Here146", spec.vals)
     imax = spec.vals[:vocabDictVecLength]
     i0 = max(1, Int(trunc((Int(str[1]) - Int('a') +1)/(26/imax))))
     i = min(i0, imax)

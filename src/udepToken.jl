@@ -19,11 +19,9 @@ struct UdepTokenCore <: AbstractUdepToken
     caps::UInt8
     depRel::UInt8
     headOffset::Int8
-    formLemma0::UInt8   # section id for form+lemma pair
+    formLemma0::UInt8  # section id for form+lemma pair
     formLemma::UInt16  # entry id for form+lemma pair
 end
-
-const nullUtok = UdepTokenCore(0, 0, 0, 0, typemax(Int8), 0, 0)  
 
 function UdepTokenCore(; tok=nullUtok,
     upos    = tok.upos, 
@@ -51,10 +49,5 @@ struct UdepToken
     lemmaStr::String
     customCaps::Tuple{Vararg{UInt8}}
 end
-
-const nullUtok = UdepToken(
-    UdepTokenCore(0, 0, 0, 0, 0, 0, 0),  ## 0 headOffset??? typemax(Int8)
-    "", 
-    ()
-) =#
+ =#
 
